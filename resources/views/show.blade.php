@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
     <div class="container mx-auto px-4">
-        <div class="game-details border-b border-gray-800 pb-12 flex">
+        <div class="game-details border-b border-gray-800 pb-12 flex flex-col lg:flex-row">
             <div class="game-cover flex-none">
                 <img src="images/zelda-btw.jpg" alt="game cover">
             </div>
-            <div class="game-info ml-12 mr-64">
-                <h2 class="font-semibold text-4xl">Zelda: Breathe of Wild</h2>
+            <div class="game-info lg:ml-12 lg:mr-64">
+                <h2 class="font-semibold text-4xl leading-tight mt-1">Zelda: Breathe of Wild</h2>
                 <div class="text-gray-400">
                     <span>Adventure, RPG</span>
                     &middot;
@@ -24,7 +24,7 @@
                         <div class="font-semibold text-xs flex justify-center items-center h-full">90%</div>
                     </div>
                     <div class="ml-4">Critic<br>Score</div>
-                    <div class="flex items-center space-x-4 ml-6">
+                    <div class="flex items-center space-x-4 mt-6 lg:mt-0 lg:ml-6">
                         <div class="flex w-8 h-8 rounded-full bg-gray-800 items-center justify-center">
                             <a href="#">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path></svg>
@@ -64,7 +64,7 @@
 
         <div class="images-container mt-12 border-b border-gray-800 pb-12">
             <h2 class="font-semibold text-blue-500 uppercase tracking-wide">Images</h2>
-            <div class="grid grid-cols-3 gap-12 mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-8">
                 <div>
                     <a href="#">
                         <img src="images/zelda-screenshot.png" alt="screenshot" class="hover:opacity-75 transition ease-in-out duration-150">
