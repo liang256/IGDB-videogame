@@ -12,7 +12,7 @@
         <nav class="container mx-auto items-center flex flex-col lg:flex-row justify-between px-4 px-6">
             <div class="flex flex-col lg:flex-row items-center">
                 <a href="/" class="font-semibold">
-                    Home
+                    IGDB Video Games
                 </a>
                 <ul class="flex ml-0 lg:ml-16 space-x-8 mt-4 lg:mt-0">
                     <li><a href="#" class="hover:text-gray-400">Games</a></li>
