@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Controllers\GamesController as GamesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [App\Http\Controllers\GamesController::class, 'index']);
 Route::get('/show', function () {
     return view('show');
 });
