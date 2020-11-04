@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-900 text-white">
     <header class="border-b border-gray-800">
-        <nav class="container mx-auto items-center flex flex-col lg:flex-row justify-between px-4 px-6">
+        <nav class="container mx-auto items-center flex flex-col lg:flex-row justify-between px-4 px-6 my-2">
             <div class="flex flex-col lg:flex-row items-center">
                 <a href="/" class="font-semibold">
                     IGDB Video Games
