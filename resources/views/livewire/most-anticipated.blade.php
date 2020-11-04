@@ -17,6 +17,6 @@
         </div> 
     </div> <!-- end most-anticipated -->
 @empty
-    loading...
+    <div class="spinner my-8"></div>
 @endforelse
 </div>

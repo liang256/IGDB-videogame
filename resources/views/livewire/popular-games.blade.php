@@ -26,6 +26,6 @@
             </div>
         </div>
     @empty
-        <p>loading...</p>
+        <div class="spinner my-8"></div>
     @endforelse
 </div> <!-- end popular-games -->

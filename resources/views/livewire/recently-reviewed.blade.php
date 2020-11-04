@@ -33,6 +33,6 @@
         </div>
     </div> <!-- end recently-reviewed -->
 @empty
-    loading...
+    <div class="spinner my-8"></div>
 @endforelse
 </div>
