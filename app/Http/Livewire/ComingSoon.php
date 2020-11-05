@@ -33,7 +33,7 @@ class ComingSoon extends Component
         return view('livewire.coming-soon',['comingSoon' => $this->comingSoon]);
     }
 
-    public function formatForView($games)
+    private function formatForView($games)
     {
         return collect($games)->map(function($game){
             return collect($game)->merge([

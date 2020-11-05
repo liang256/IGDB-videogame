@@ -34,7 +34,7 @@ class MostAnticipated extends Component
         return view('livewire.most-anticipated',['mostAnticipated' => $this->mostAnticipated]);
     }
 
-    public function formatForView($games)
+    private function formatForView($games)
     {
         return collect($games)->map(function($game){
             return collect($game)->merge([
