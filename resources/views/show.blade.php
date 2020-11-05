@@ -24,14 +24,14 @@
                 </div>
 
                 <div class="score-and-social-links flex flex-wrap items-center mt-8">
-                    @if($game['rating'])
+                    
                     <div class="w-16 h-16 rounded-full bg-gray-800">
                         <div class="font-semibold text-xs flex justify-center items-center h-full">
-                            {{ $game['rating'] }}
+                            {{ $game['rating']?$game['rating']:'? %' }}
                         </div>
                     </div>
                     <div class="ml-4">Member<br>Score</div>
-                    @endif
+                    
                     @if($game['aggregated_rating'])
                     <div class="w-16 h-16 rounded-full bg-gray-800 ml-4">
                         <div class="font-semibold text-xs flex justify-center items-center h-full">
