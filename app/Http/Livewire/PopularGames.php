@@ -18,7 +18,7 @@ class PopularGames extends Component
 
         $this->popularGames = Cache::remember('popular-games', 7, function () use($before, $after){
             return Http::withHeaders(config('services.igdb'))->withBody("
-                fields name,rating,platforms.abbreviation,first_release_date,cover.url;
+                fields name,rating,platforms.abbreviation,first_release_date,cover.url,slug;
                 sort rating desc;
                 where (first_release_date >= {$before} & first_release_date <= {$after}) & platforms = (48,49,130) & rating > 40;
                 limit 12;

@@ -17,7 +17,7 @@ class ComingSoon extends Component
 
         $this->comingSoon = Cache::remember('coming-soon', 7, function () use($current){
             return Http::withHeaders(config('services.igdb'))->withBody("
-                fields name,first_release_date,cover.url;
+                fields name,first_release_date,cover.url, slug;
                 sort first_release asc;
                 where first_release_date >= {$current} & platforms = (48,49,130) & cover.url != null;
                 limit 4;
