@@ -12,22 +12,20 @@
                 <div class="absolute b0ttom-0 right-0 w-16 h-16 bg-gray-900 rounded-full"
                     style="right: -20px; bottom:-20px"
                 >
-                    <div class="text-sm font-semiblod flex items-center justify-center h-full">{{round($game['rating']).'%'}}</div>
+                    <div class="text-sm font-semiblod flex items-center justify-center h-full">
+                        {{ $game['rating'] }}
+                    </div>
                 </div>
             </div> <!-- end relative -->    
             <div class="ml-12">
                 <a href="{{ route('games.show', $game['slug']) }}" class="block text-lg font-semibold leading-tight hover:text-gray-400 mt-4">
-                    {{$game['name']}}
+                    {{ $game['name'] }}
                 </a>
                 <div class="text-gray-400 mt-1">
-                    @foreach($game['platforms'] as $platform)
-                        @if(array_key_exists('abbreviation',$platform))
-                            {{$platform['abbreviation']}},
-                        @endif
-                    @endforeach
+                    {{ $game['platforms'] }}
                 </div>
                 <p class="hidden lg:block mt-6 text-gray-400">
-                    {{$game['summary']}}
+                    {{ $game['summary'] }}
                 </p>
             </div>
         </div>
