@@ -37,7 +37,7 @@ class ComingSoon extends Component
     {
         return collect($games)->map(function($game){
             return collect($game)->merge([
-                'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','small_big',$game['cover']['url']):null,
+                'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_small',$game['cover']['url']):null,
                 'link' => route('games.show', $game['slug']),
                 'release_date' => Carbon::parse($game['first_release_date'])->format('M d, Y'),
             ]);
