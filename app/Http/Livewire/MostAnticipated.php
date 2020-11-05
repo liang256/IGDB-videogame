@@ -6,6 +6,7 @@ use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http as Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class MostAnticipated extends Component
 {
@@ -16,7 +17,7 @@ class MostAnticipated extends Component
         $after = Carbon::now()->addMonths(6)->timestamp;
         $current = Carbon::now()->timestamp;
 
-        $this->mostAnticipated = Cache::remember('most-anticipated', 7, function () use($current, $after){
+        $unformat = Cache::remember('most-anticipated', 7, function () use($current, $after){
             return Http::withHeaders(config('services.igdb'))->withBody("
                 fields name,first_release_date,cover.url, slug;
                 sort rating desc;
@@ -24,13 +25,23 @@ class MostAnticipated extends Component
                 limit 4;
             ",'raw')->post('https://api.igdb.com/v4/games')->json();
         });
-
-        //dd($this->mostAnticipated);
-        //dd('after '.$after.'   current '.$current.'   release '.$this->mostAnticipated[1]['first_release_date']);
+        
+        $this->mostAnticipated = $this->formatForView($unformat);
     }
 
     public function render()
     {
         return view('livewire.most-anticipated',['mostAnticipated' => $this->mostAnticipated]);
+    }
+
+    public function formatForView($games)
+    {
+        return collect($games)->map(function($game){
+            return collect($game)->merge([
+                'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_small',$game['cover']['url']):null,
+                'link' => route('games.show', $game['slug']),
+                'release_date' => Carbon::parse($game['first_release_date'])->format('M d, Y'),
+            ]);
+        })->toArray();
     }
 }
