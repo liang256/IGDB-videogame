@@ -14,6 +14,7 @@ class SearchDropdown extends Component
     public function render()
     {
         if(strlen($this->search) < 2){
+            $this->searchResults = [];
             return view('livewire.search-dropdown');
         }else{
             $unformatGames = Http::withHeaders(config('services.igdb'))->withBody("
