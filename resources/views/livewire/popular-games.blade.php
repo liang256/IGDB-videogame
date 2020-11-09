@@ -2,7 +2,7 @@
     @forelse($popularGames as $game)
         <div class="game mt-8">
             <x-game-card :game="$game" />
-            <a href="#" class="block text-base font-semibold leading-tight hover:text-gray-400 mt-8">
+            <a href="{{$game['link']}}" class="block text-base font-semibold leading-tight hover:text-gray-400 mt-8">
                 {{ $game['name'] }}
             </a>
             <div class="text-gray-400 mt-1">
