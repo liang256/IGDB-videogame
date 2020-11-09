@@ -1,10 +1,21 @@
-<div class="relative">
+<div class="relative" x-data="{ isVisiable: true }" @click.away="isVisiable=false">
     <input
         wire:model.debounce.300ms="search" 
         type="text"
         class="bg-gray-800 text-sm rounded-full w-64 px-3 pl-8 py-1
             focus:outline-none foucus:shadow-outline"
-        placeholder="search..."
+        placeholder="search (press '/' to focus)"
+        x-ref="search"
+        @keydown.window="
+            if(event.keyCode === 191){
+                event.preventDefault();
+                $refs.search.focus();
+            }
+        "
+        @focus="isVisiable = true"
+        @keydown.escape.window="isVisiable = false"
+        @keydown="isVisiable = true"
+        @keydown.shift.tab="isVisiable = false"
     >
 
     <div class="absolute top-0 flex items-center h-full ml-2">
@@ -16,12 +27,14 @@
     <div wire:loading class="spinner right-0 top-0 mt-3 mr-4" style="position:absolute"></div>
 
     @if(strlen($search)>=2)
-    <div class="absolute z-50 bg-gray-800 text-xs rounded w-64 mt-2">
+    <div class="absolute z-50 bg-gray-800 text-xs rounded w-64 mt-2" x-show.transition.opacity.duration.200="isVisiable">
         <ul>
             @if(count($searchResults)>0)
                 @foreach($searchResults as $game)
                     <li class="border-b border-gray-700">
-                        <a href="{{$game['link']}}" class="block hover:bg-gray-700 px-3 py-3 flex items-center transition ease-in-out duration-150">
+                        <a href="{{$game['link']}}" class="block hover:bg-gray-700 px-3 py-3 flex items-center transition ease-in-out duration-150"
+                            @if($loop->last) @keydown.tab="isVisiable = false" @endif
+                        >
                             <img src="{{$game['coverImageUrl']}}" alt="game cover" class="w-10">
                             <span class="ml-4">{{$game['name']}}</span>
                         </a>
