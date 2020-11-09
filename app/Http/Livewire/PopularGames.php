@@ -26,8 +26,6 @@ class PopularGames extends Component
             ",'raw')->post('https://api.igdb.com/v4/games')->json();
         });
 
-        //dd($this->formatForView($unformatGames));
-
         $this->popularGames = $this->formatForView($unformatGames);
     }
 
@@ -40,10 +38,10 @@ class PopularGames extends Component
     {
         return collect($games)->map(function($game){
             return collect($game)->merge([
-                'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_big',$game['cover']['url']):null,
-                'platforms' => $game['platforms']?collect($game['platforms'])->pluck('abbreviation')->implode(', '):null,
-                'rating' => $game['rating']?round($game['rating']):null,
-                'link' => route('games.show', $game['slug']),
+                'coverImageUrl' => isset($game['cover'])?Str::replaceFirst('thumb','cover_big',$game['cover']['url']):null,
+                'platforms' => isset($game['platforms'])?collect($game['platforms'])->pluck('abbreviation')->implode(', '):null,
+                'rating' => isset($game['rating'])?round($game['rating']):null,
+                'link' => isset($game['slug'])?route('games.show', $game['slug']):null,
             ]);
         })->toArray();
     }
