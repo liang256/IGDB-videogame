@@ -6,6 +6,7 @@
     <title>Video Games</title>
     
     <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/app.js"></script>
     @livewireStyles
 </head>
 <body class="bg-gray-900 text-white">
@@ -49,5 +50,7 @@
         
     </footer>
     @livewireScripts
+    
+    @stack('scripts')
 </body>
 </html>
