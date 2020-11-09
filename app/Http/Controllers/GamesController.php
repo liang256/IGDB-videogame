@@ -66,9 +66,9 @@ class GamesController extends Controller
         return collect($game)->merge([
             'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_big',$game['cover']['url']):null,
             'link' => route('games.show', $game['slug']),
-            'release_date' => Carbon::parse($game['first_release_date'])->format('M d, Y'),
-            'rating' => isset($game['rating'])?round($game['rating']).'%':null,
-            'aggregated_rating' => isset($game['aggregated_rating'])?round($game['aggregated_rating']).'%':null,
+            'release_date' => isset($game['first_release_date'])?Carbon::parse($game['first_release_date'])->format('M d, Y'):null,
+            'rating' => isset($game['rating'])?round($game['rating']):0,
+            'aggregated_rating' => isset($game['aggregated_rating'])?round($game['aggregated_rating']):0,
             'platforms' => isset($game['platforms'])?collect($game['platforms'])->pluck('abbreviation')->implode(', '):null,
             'genres' => isset($game['genres'])?collect($game['genres'])->pluck('name')->implode(', '):null,
             'involved_companies' => isset($game['involved_companies'])?collect($game['involved_companies'])->pluck('company.name')->implode(', '):null,
@@ -79,15 +79,15 @@ class GamesController extends Controller
                 ];
             }),
             'trailerUrl' => isset($game['videos'])?"https://youtube.com/watch/".$game['videos'][0]['video_id']:'#',
-            'similar_games' => collect($game['similar_games'])->map(function($game){
+            'similar_games' => isset($game['similar_games']) ? collect($game['similar_games'])->map(function($game){
                 return collect($game)->merge([
                     'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_big',$game['cover']['url']):null,
                     'link' => route('games.show', $game['slug']),
-                    'rating' => isset($game['rating'])?round($game['rating']).'%':null,
-                    'platforms' => $game['platforms']?collect($game['platforms'])->pluck('abbreviation')->implode(', '):null,
+                    'rating' => isset($game['rating'])?round($game['rating']):0,
+                    'platforms' => isset($game['platforms'])?collect($game['platforms'])->pluck('abbreviation')->implode(', '):null,
                 ]);
-            }),
-            'social' => [
+            }):null,
+            'social' => isset($game['websites'])?[
                 'website' => collect($game['websites'])->first(),
                 'facebook' => collect($game['websites'])->filter(function($website){
                     return Str::contains($website['url'],'facebook');
@@ -98,7 +98,7 @@ class GamesController extends Controller
                 'instagram' => collect($game['websites'])->filter(function($website){
                     return Str::contains($website['url'],'instagram');
                 })->first(),
-            ],
+            ]:null,
         ])->toArray();
     }
 

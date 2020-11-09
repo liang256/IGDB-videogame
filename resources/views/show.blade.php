@@ -25,22 +25,32 @@
 
                 <div class="score-and-social-links flex flex-wrap items-center mt-8">
                     
-                    <div class="w-16 h-16 rounded-full bg-gray-800">
-                        <div class="font-semibold text-xs flex justify-center items-center h-full">
-                            {{ $game['rating']?$game['rating']:'? %' }}
-                        </div>
+                    <div id="memberRating" class="w-16 h-16 rounded-full bg-gray-800 text-sm relative">
+                        @push('scripts')
+                            @include('_rating',[
+                                'id' => 'memberRating',
+                                'rating' => $game['rating'],
+                                'event' => null,
+                            ])
+                        @endpush
                     </div>
                     <div class="ml-4">Member<br>Score</div>
                     
                     @if($game['aggregated_rating'])
-                    <div class="w-16 h-16 rounded-full bg-gray-800 ml-4">
-                        <div class="font-semibold text-xs flex justify-center items-center h-full">
-                            {{ $game['aggregated_rating'] }} 
-                        </div>
+                    <div id="criticRating" class="w-16 h-16 rounded-full bg-gray-800 ml-4 relative text-sm">
+                        @push('scripts')
+                            @include('_rating',[
+                                'id' => 'criticRating',
+                                'rating' => $game['aggregated_rating'],
+                                'event' => null,
+                            ])
+                        @endpush
                     </div>
                     <div class="ml-4">Critic<br>Score</div>
                     @endif
-                    <div class="flex items-center space-x-4 mt-6 lg:mt-0 lg:ml-6">
+                    
+                    @if($game['social'])
+                    <div class="social-medias flex items-center space-x-4 mt-6 lg:mt-0 lg:ml-6">
                         @if($game['social']['website'])
                         <div class="flex w-8 h-8 rounded-full bg-gray-800 items-center justify-center">
                             <a href="{{ $game['social']['website']['url'] }}" class="hover:text-gray-400" target="_blank">
@@ -70,6 +80,7 @@
                         </div>
                         @endif
                     </div>
+                    @endif
                 </div> <!-- end socre-and-social-links -->
 
                 <p class="text-gray-400 mt-12">
@@ -104,7 +115,7 @@
         <div class="similar-games mt-12 mb-12">
             <h2 class="font-semibold text-blue-500 uppercase tracking-wide">Similar Games</h2>
             <div class="text-sm grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-12">
-                @if(array_key_exists('similar_games', $game))
+                @if(isset($game['similar_games']))
                     @foreach($game['similar_games'] as $game)
                         <div class="game mt-8">
                             <x-game-card :game="$game" />

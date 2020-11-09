@@ -40,7 +40,7 @@ class RecentlyReviewed extends Component
             return collect($game)->merge([
                 'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_big',$game['cover']['url']):null,
                 'platforms' => $game['platforms']?collect($game['platforms'])->pluck('abbreviation')->implode(', '):null,
-                'rating' => $game['rating']?round($game['rating']).'%':'?%',
+                'rating' => $game['rating']?round($game['rating']):null,
                 'link' => route('games.show', $game['slug']),
             ]);
         })->toArray();
