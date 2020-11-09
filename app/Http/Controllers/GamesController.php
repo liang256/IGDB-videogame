@@ -55,7 +55,7 @@ class GamesController extends Controller
         ",'raw')->post('https://api.igdb.com/v4/games')->json();
 
         abort_if(!$game, 404);
-        
+
         return view('show', [
             'game' => $this->formatForView($game[0])
         ]);
@@ -78,7 +78,7 @@ class GamesController extends Controller
                     'huge' => Str::replaceFirst('thumb','screenshot_big',$screenshot['url']),
                 ];
             }),
-            'trailerUrl' => isset($game['videos'])?"https://youtube.com/watch/".$game['videos'][0]['video_id']:'#',
+            'trailerUrl' => isset($game['videos'])?"https://youtube.com/embed/".$game['videos'][0]['video_id'].'?autoplay=1':'#',
             'similar_games' => isset($game['similar_games']) ? collect($game['similar_games'])->map(function($game){
                 return collect($game)->merge([
                     'coverImageUrl' => $game['cover']?Str::replaceFirst('thumb','cover_big',$game['cover']['url']):null,
