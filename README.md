@@ -2,7 +2,7 @@
 
 This project is a website, which shows recent popular games and their info, and is developed by Laravel and IGDB API.
 
-The project is a practice of sreries: [Build a Video Game Aggregator](https://laracasts.com/series/build-a-video-game-aggregator). I followed almost every steps of this tutorial. I really appriciate this series and learned a lot from it.
+The project is a practice of series: [Build a Video Game Aggregator](https://laracasts.com/series/build-a-video-game-aggregator). I followed almost every step of this tutorial. I really appreciate this series and learned a lot from it.
 
 ## Installation
 
